@@ -1,6 +1,6 @@
 # Recommendation system for FUZU jobs website
 FUZU is a career site connecting job seekers with opportunities in East Africa. FUZU has an Open API allowing developers to access all the open jobs as a JSON object.
-I used this API to build a simple recommendation system using PCA and cosine similarity. The user also has the option to include the description and title which are vectorized using a TF-IDF vectorizer. This is an example of **item-item collaborative filtering**.
+I used this API to build a simple recommendation system using PCA and cosine similarity. The user also has the option to include the description and title which are vectorized using a TF-IDF vectorizer. This is an example of **Content based filtering**.
 
 
 ## Details
@@ -10,7 +10,7 @@ Several data fields have little or no data in so these are removed during the da
 
 In the case of text fields such as 'title' and 'description', there is the option to vectorize these features and use them in the recommendation system. In this a tf-idf (term frequency - inverse document frequency) approach is used to select common but important words. The min and max document frequencies used are 0.005 and 0.5 respectively. The number of vectors outputted are defined by the user as they depend on the type of text field. For example, the description field is more complex then the title and therefore needs more vector components to correctly represent it.  
 
-As there are several categorical features, the feature space is very large. Item-item collaborative filtering depends on finding the 'distance' or 'similarity' between job postings, therefore dimensionality needs to be reduced. For this I have used PCA and chosen 20 dimensions as this compromises between capturing variance in the data (~0.5 when running this code in May 2018) and mitigating the impact of increased dimensionality. I also used the cosine similarity metric to find similar posting as it is believed to be less sensitive to increased dimensionality. *scikit learn* library has been used for text vectorization and PCA.
+As there are several categorical features, the feature space is very large. Content based filtering depends on finding the 'distance' or 'similarity' between job postings, therefore dimensionality needs to be reduced. For this I have used PCA and chosen 20 dimensions as this compromises between capturing variance in the data (~0.5 when running this code in May 2018) and mitigating the impact of increased dimensionality. I also used the cosine similarity metric to find similar posting as it is believed to be less sensitive to increased dimensionality. *scikit learn* library has been used for text vectorization and PCA.
 
 The top 5 closest postings are found for each posting and saved. This allows the user to use the make_recommendations.py script to find recommendatiosn and evaluate the results without having to retrain the model.
 
